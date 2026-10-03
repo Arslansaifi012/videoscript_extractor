@@ -1,0 +1,94 @@
+
+# ---------------------------------------------------------------------------
+# Environment Variables & Secrets (NEVER COMMIT THESE)
+# ---------------------------------------------------------------------------
+.env
+.env.local
+.env.*.local
+*.env
+config/*secrets.*
+*.pem
+*.key
+
+# ---------------------------------------------------------------------------
+# Dependencies & Package Managers
+# ---------------------------------------------------------------------------
+# Node.js
+node_modules/
+jspm_packages/
+.npm
+.eslintcache
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+ENV/
+.pytest_cache/
+.mypy_cache/
+
+# Java / Maven / Gradle
+target/
+*.class
+.gradle/
+build/
+
+# Go
+/bin/
+/pkg/
+
+# Ruby / Rails
+/vendor/bundle/
+.bundle/
+/pkg/
+
+# ---------------------------------------------------------------------------
+# Build Outputs & Compiled Code
+# ---------------------------------------------------------------------------
+dist/
+out/
+.next/
+.nuxt/
+.output/
+lib-cov
+coverage/
+.nyc_output/
+
+# ---------------------------------------------------------------------------
+# Logs, Databases & Temporaries
+# ---------------------------------------------------------------------------
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+*.pid
+*.seed
+*.pid.lock
+
+# Databases
+*.db
+*.sqlite3
+*.sqlite3-journal
+*.rdb
+*.aof
+
+# ---------------------------------------------------------------------------
+# IDEs & Editor Configurations
+# ---------------------------------------------------------------------------
+# VS Code
+.vscode/
+!.vscode/extensions.json
+
+# JetBrains (IntelliJ, WebStorm, PyCharm)
+.idea/
+*.iml
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+Thumbs.db
+ehthumbs.db
