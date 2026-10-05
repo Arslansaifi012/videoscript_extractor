@@ -1,5 +1,5 @@
 
-import app from '../video_text_extractor/app.js'
+import app from "./app.js"
 const PORT = 7000;
 
 
