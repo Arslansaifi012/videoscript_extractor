@@ -19,38 +19,6 @@ Ffmpeg("./video/video.mp4")
   })
   .run();
 
-const frames = fs
-  .readdirSync("./frames")
-  .filter((file) => file.endsWith(".jpg"))
-  .sort();
 
-let previousHash = null;
+  
 
-for (const frame of frames) {
-  const image = await sharp(`./frames/${frame}`)
-    .extract({
-      left: 0,
-      top: 280,
-      width: 1080,
-      height: 650,
-    })
-    .resize(64, 64)
-    .grayscale()
-    .raw()
-    .toBuffer();
-
-  const currentHash = image.toString("hex");
-
-  if (!previousHash) {
-    console.log("First frame:", frame);
-    previousHash = currentHash;
-    continue;
-  }
-
-  if (currentHash !== previousHash) {
-    console.log("CHANGE:", frame);
-    previousHash = currentHash;
-  }
-}
-
-export default app;
