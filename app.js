@@ -2,7 +2,6 @@ import express from "express";
 import fs from "fs";
 import sharp from "sharp";
 
-
 const app = express();
 
 import ffmpegPath from "ffmpeg-static";
@@ -18,39 +17,40 @@ Ffmpeg("./video/video.mp4")
   .on("end", function () {
     console.log("frame extracted complete");
   })
-    .run();
+  .run();
 
+const frames = fs
+  .readdirSync("./frames")
+  .filter((file) => file.endsWith(".jpg"))
+  .sort();
 
+let previousHash = null;
 
-    const frames = fs
-      .readdirSync("./frames")
-      .filter((file) => file.endsWith(".jpg"))
-      .sort();
+for (const frame of frames) {
+  const image = await sharp(`./frames/${frame}`)
+    .extract({
+      left: 0,
+      top: 280,
+      width: 1080,
+      height: 650,
+    })
+    .resize(64, 64)
+    .grayscale()
+    .raw()
+    .toBuffer();
 
-    let previousHash = null;
+  const currentHash = image.toString("hex");
 
-    for (const frame of frames) {
-      const image = await sharp(`./frames/${frame}`)
-        .resize(64, 64)
-        .grayscale()
-        .raw()
-        .toBuffer();
+  if (!previousHash) {
+    console.log("First frame:", frame);
+    previousHash = currentHash;
+    continue;
+  }
 
-      const currentHash = image.toString("hex");
-
-      if (!previousHash) {
-        console.log("First frame:", frame);
-        previousHash = currentHash;
-        continue;
-      }
-
-      if (currentHash !== previousHash) {
-        console.log("CHANGE:", frame);
-        previousHash = currentHash;
-      }
-    }
-  
-
-
+  if (currentHash !== previousHash) {
+    console.log("CHANGE:", frame);
+    previousHash = currentHash;
+  }
+}
 
 export default app;
